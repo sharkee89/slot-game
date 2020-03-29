@@ -1,0 +1,13 @@
+.reel-set-container {
+    display: grid;
+    position: absolute;
+    background-color: orange;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    &__reel {
+        position: relative;
+        overflow: hidden;
+    }
+}

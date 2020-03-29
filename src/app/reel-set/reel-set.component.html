@@ -1,0 +1,4 @@
+<div class="reel-set-container"
+    [ngStyle]="{'grid-template-columns': 'repeat(' + reelsNumber + ', 1fr)'}">
+    <app-reel #reelComp *ngFor="let reel of reels" class="reel-set-container__reel"></app-reel>
+</div>

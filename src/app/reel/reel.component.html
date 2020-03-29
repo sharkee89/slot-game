@@ -1,0 +1,11 @@
+<div class="reel-container"
+    #reelContainer                               
+    [ngStyle]="{
+        'height': 100 / symbolsNumber * symbols.length + '%',
+        'grid-template-rows': 'repeat(' + symbols.length + ', 1fr)'
+    }">
+    <div #symbolComp class="reel-container__symbol" *ngFor="let symbol of reelConfiguration"
+    [ngStyle]="{'height': reelContainer.offsetHeight / symbols.length + 'px'}">
+        <img src="../../assets/symbols/{{symbol.image}}.png" alt="">
+    </div>
+</div>

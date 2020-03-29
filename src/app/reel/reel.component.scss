@@ -1,0 +1,20 @@
+img {
+    max-width: 100%;
+    max-height: 100%;
+    transform: scale(.7);
+}
+
+.reel-container {
+    position: absolute;
+    display: grid;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -6%);
+    &__symbol {
+        position: relative;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+    }
+}

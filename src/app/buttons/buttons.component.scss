@@ -1,0 +1,17 @@
+.buttons-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    & button {
+        padding: .5em 2em;
+        font-size: 1.15em;
+        background-color: transparent;
+        color: pink;
+        cursor: pointer;
+        border: 1px solid pink;
+        &[disabled] {
+            opacity: .5;
+        }
+    }
+}
