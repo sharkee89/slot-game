@@ -112,7 +112,7 @@ export class ReelSetComponent implements OnInit, OnDestroy {
       }, 1000 + index * 1000);
     });
     if (!this.winningCombinations.length) {
-      // this.store.dispatch(new SetSpinDisabled(false));
+      this.store.dispatch(new SetSpinDisabled(false));
     }
   }
 
@@ -123,7 +123,7 @@ export class ReelSetComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.highlight(combination, false);
       if (last) {
-        // this.store.dispatch(new SetSpinDisabled(false));
+        this.store.dispatch(new SetSpinDisabled(false));
       }
     }, 500);
   }

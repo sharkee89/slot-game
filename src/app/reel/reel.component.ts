@@ -87,27 +87,33 @@ export class ReelComponent implements OnInit {
   }
 
   private startSpinning(idx: number) {
-    // this.renderer.setStyle(this.reelContainer.nativeElement, 'opacity', '1');
     const choice = Math.floor(Math.random() * 6) + 1;
     const result = 6 + 4 * choice;
-    let goal = -6;
-    let value = 1;
+    console.log(`Result: ${result}`);
+    let counter = -6;
     const inter = setInterval(() => {
-      goal = goal - value;
-      if (Math.abs(goal) >= result) {
-        clearInterval(inter);
-        // this.renderer.setStyle(this.reelContainer.nativeElement, 'opacity', '0.5');
-        let counter = (Math.abs(goal) - 6) / 4;
-        this.startIndex = (Math.abs(goal) - 6) / 4;;
-        const results = [];
-        for (let i = 0; i < 3; i++) {
-          results.push(this.getResultSymbol(this.reelConfiguration[counter]));
-          counter++;
-        }
-        this.store.dispatch(new SetResult({result: results, index: idx}));
+      if (counter === -94) {
+        counter = -6;
       }
-      this.renderer.setStyle(this.reelContainer.nativeElement, 'transform', 'translate(-50%, ' + goal + '%)');
-    }, 10);
+      this.renderer.setStyle(this.reelContainer.nativeElement, 'transform', 'translate(-50%, ' + counter + '%)');
+      counter--;
+    }, 5);
+    setTimeout(() => {
+      this.afterRolling(idx, inter, result);
+    }, (idx * 300) + 500);
+  }
+
+  private afterRolling(idx, inter, result) {
+    clearInterval(inter);
+      this.renderer.setStyle(this.reelContainer.nativeElement, 'transform', 'translate(-50%, -' + result + '%)');
+      let c = (Math.abs(result) - 6) / 4;
+      this.startIndex = (Math.abs(result) - 6) / 4;;
+      const results = [];
+      for (let i = 0; i < 3; i++) {
+        results.push(this.getResultSymbol(this.reelConfiguration[c]));
+        c++;
+      }
+      this.store.dispatch(new SetResult({result: results, index: idx}));
   }
 
   private getRandomArbitrary(min, max) {

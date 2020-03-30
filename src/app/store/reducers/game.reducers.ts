@@ -16,8 +16,9 @@ export const gameReducers = (
                 ...state,
                 game: {
                     ...state.game,
-                    spinning: action.payload
-                }
+                    spinning: action.payload,
+                },
+                spinDisabled: true
             };
         }
         case EGameActions.SetResult: {
@@ -71,12 +72,13 @@ export const gameReducers = (
             break;
         }
         case EGameActions.SetResultCounter: {
+            console.log(action.payload);
             return {
                 ...state,
                 game: {
                     ...state.game,
                     resultSetCounter: action.payload
-                }
+                },
             }
         }
         case EGameActions.SetSpinDisabled: {

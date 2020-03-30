@@ -21,7 +21,7 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    // this.subscribeToSpinDisabled();
+    this.subscribeToSpinDisabled();
   }
 
   ngOnDestroy() {
@@ -39,7 +39,6 @@ export class ButtonsComponent implements OnInit, OnDestroy {
     this.store.select(selectSpinDisabled)
       .pipe(takeUntil(this.spinDisabledDestroyed$))
       .subscribe((spinDis) => {
-        console.log(spinDis);
         this.spinDisabled = spinDis;
       });
   }
