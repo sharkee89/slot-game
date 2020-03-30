@@ -91,14 +91,14 @@ export class ReelComponent implements OnInit {
     const choice = Math.floor(Math.random() * 6) + 1;
     const result = 6 + 4 * choice;
     let goal = -6;
-    let value = [0.5, 0.8, 1][this.getRandomArbitrary(0, 2).toFixed()];
+    let value = 1;
     const inter = setInterval(() => {
       goal = goal - value;
       if (Math.abs(goal) >= result) {
         clearInterval(inter);
         // this.renderer.setStyle(this.reelContainer.nativeElement, 'opacity', '0.5');
-        let counter = (Math.abs(goal.toFixed()) - 6) / 4;
-        this.startIndex = (Math.abs(goal.toFixed()) - 6) / 4;;
+        let counter = (Math.abs(goal) - 6) / 4;
+        this.startIndex = (Math.abs(goal) - 6) / 4;;
         const results = [];
         for (let i = 0; i < 3; i++) {
           results.push(this.getResultSymbol(this.reelConfiguration[counter]));

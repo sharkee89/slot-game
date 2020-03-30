@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, QueryList, ViewChildren, OnDestroy } from '@angular/core';
 import { CONSTANTS } from 'src/app/config/constants';
 import { ReelComponent } from '../reel/reel.component';
 import { IAppState } from '../store/state/app.state';
@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { selectSpinning, selectGameObject } from '../store/selectors/game.selectors';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { SetSpinDisabled } from '../store/actions/game.actions';
+import { SetSpinDisabled, SetResultCounter } from '../store/actions/game.actions';
 
 @Component({
   selector: 'app-reel-set',
@@ -71,7 +71,9 @@ export class ReelSetComponent implements OnInit, OnDestroy {
             game.resultFour,
             game.resultFive
           ];
+          console.log(game.resultSetCounter);
           this.evaluateResults(spinningResults);
+          this.store.dispatch(new SetResultCounter(0));
         }
       });
   }

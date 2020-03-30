@@ -5,6 +5,7 @@ export enum EGameActions {
     GetGame = '[Game] Get Game',
     SetSpinning = '[Game] Set Spinning',
     SetResult = '[Game] Set Result',
+    SetResultCounter = '[Game] Set Result Counter',
     SetSpinDisabled = '[Game] Set Spin Disabled'
 }
 
@@ -22,6 +23,11 @@ export class SetResult implements Action {
     constructor(public payload: IResultPayload) {}
 }
 
+export class SetResultCounter implements Action {
+    public readonly type = EGameActions.SetResultCounter;
+    constructor(public payload: any) {}
+}
+
 export class SetSpinDisabled implements Action {
     public readonly type = EGameActions.SetSpinDisabled;
     constructor(public payload: boolean) {}
@@ -31,4 +37,5 @@ export type GameActions =
     GetGame |
     SetSpinning |
     SetResult |
+    SetResultCounter |
     SetSpinDisabled;

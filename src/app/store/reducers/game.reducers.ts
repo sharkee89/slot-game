@@ -70,6 +70,15 @@ export const gameReducers = (
             }
             break;
         }
+        case EGameActions.SetResultCounter: {
+            return {
+                ...state,
+                game: {
+                    ...state.game,
+                    resultSetCounter: action.payload
+                }
+            }
+        }
         case EGameActions.SetSpinDisabled: {
             return {
                 ...state,
