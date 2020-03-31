@@ -5,6 +5,7 @@ import { SetSpinning, SetSpinDisabled } from '../store/actions/game.actions';
 import { ReplaySubject } from 'rxjs';
 import { selectSpinDisabled } from '../store/selectors/game.selectors';
 import { takeUntil } from 'rxjs/operators';
+import { playAudio } from '../helpers/general.helper';
 
 @Component({
   selector: 'app-buttons',
@@ -15,6 +16,7 @@ export class ButtonsComponent implements OnInit, OnDestroy {
 
   spinDisabled;
   spinDisabledDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  audio = new Audio();
 
   constructor(
     private store: Store<IAppState>
@@ -30,7 +32,8 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   }
 
   handleSpin() {
-    // this.store.dispatch(new SetSpinDisabled(true));
+    localStorage.setItem('name', 'Sladja');
+    playAudio('assets/sounds/rolling.mp3', this.audio);
     this.store.dispatch(new SetSpinning(true));
     this.store.dispatch(new SetSpinning(false));
   }

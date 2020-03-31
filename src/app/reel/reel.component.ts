@@ -4,6 +4,7 @@ import { ReplaySubject } from 'rxjs';
 import { IAppState } from '../store/state/app.state';
 import { Store } from '@ngrx/store';
 import { SetResult } from '../store/actions/game.actions';
+import { playAudio } from '../helpers/general.helper';
 
 @Component({
   selector: 'app-reel',
@@ -20,6 +21,7 @@ export class ReelComponent implements OnInit {
   showReelContainer = false;
   spinDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   startIndex;
+  audio = new Audio();
 
   constructor(
     private store: Store<IAppState>,
@@ -100,20 +102,21 @@ export class ReelComponent implements OnInit {
     }, 5);
     setTimeout(() => {
       this.afterRolling(idx, inter, result);
-    }, (idx * 300) + 500);
+    }, (idx * 250) + 1250);
   }
 
   private afterRolling(idx, inter, result) {
+    playAudio('assets/sounds/check.wav', this.audio);
     clearInterval(inter);
-      this.renderer.setStyle(this.reelContainer.nativeElement, 'transform', 'translate(-50%, -' + result + '%)');
-      let c = (Math.abs(result) - 6) / 4;
-      this.startIndex = (Math.abs(result) - 6) / 4;;
-      const results = [];
-      for (let i = 0; i < 3; i++) {
-        results.push(this.getResultSymbol(this.reelConfiguration[c]));
-        c++;
-      }
-      this.store.dispatch(new SetResult({result: results, index: idx}));
+    this.renderer.setStyle(this.reelContainer.nativeElement, 'transform', 'translate(-50%, -' + result + '%)');
+    let c = (Math.abs(result) - 6) / 4;
+    this.startIndex = (Math.abs(result) - 6) / 4;;
+    const results = [];
+    for (let i = 0; i < 3; i++) {
+      results.push(this.getResultSymbol(this.reelConfiguration[c]));
+      c++;
+    }
+    this.store.dispatch(new SetResult({result: results, index: idx}));
   }
 
   private getRandomArbitrary(min, max) {

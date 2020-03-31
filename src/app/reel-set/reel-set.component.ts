@@ -7,6 +7,7 @@ import { selectSpinning, selectGameObject } from '../store/selectors/game.select
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SetSpinDisabled, SetResultCounter } from '../store/actions/game.actions';
+import { playAudio } from '../helpers/general.helper';
 
 @Component({
   selector: 'app-reel-set',
@@ -23,6 +24,7 @@ export class ReelSetComponent implements OnInit, OnDestroy {
   winningLines;
   winningCombinations = [];
   lines = CONSTANTS.LINES;
+  audio = new Audio();
 
   constructor(
     private store: Store<IAppState>,
@@ -119,6 +121,7 @@ export class ReelSetComponent implements OnInit, OnDestroy {
   private highlightWinningSymbols(combination, last) {
     setTimeout(() => {
       this.highlight(combination, true);
+      playAudio('assets/sounds/win.mp3', this.audio);
     }, 0);
     setTimeout(() => {
       this.highlight(combination, false);
