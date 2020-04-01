@@ -1,13 +1,14 @@
-import { RouterReducerState } from '@ngrx/router-store';
 import { IGameState, initialGameState } from './game.state';
+import { IMoneyState, initialMoneyState } from './money.state';
 
 export interface IAppState {
-    // router?: RouterReducerState;
     game: IGameState;
+    money: IMoneyState;
 }
 
 export const initialAppState: IAppState = {
-    game: initialGameState
+    game: initialGameState,
+    money: initialMoneyState
 };
 
 export function getInitialState(): IAppState {

@@ -1,0 +1,27 @@
+.bet-container {
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-content: center;
+    font-size: 2em;
+    &__min {
+        width: 7%;
+    }
+    &__value {
+        text-align: center;
+        width: 40%;
+        background-color: crimson;
+        border-radius: 5px;
+    }
+    &__max {
+        width: 7%;
+    }
+    & .mm {
+        border: 1px solid orange;
+        background-image: linear-gradient(to right, orange , gold, orange);
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}

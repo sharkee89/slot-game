@@ -1,8 +1,9 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { IAppState } from '../state/app.state';
-import { routerReducer } from '@ngrx/router-store';
 import { gameReducers } from './game.reducers';
+import { moneyReducers } from './money.reducers';
 
 export const appReducers: ActionReducerMap<IAppState, any> = {
-    game: gameReducers
+    game: gameReducers,
+    money: moneyReducers
 };

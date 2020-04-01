@@ -1,7 +1,8 @@
 .reel-set-container {
     display: grid;
+    grid-column-gap: .5em;
     position: absolute;
-    background-color: orange;
+    // background-image: linear-gradient(white, lightgray);
     top: 0;
     left: 0;
     height: 100%;

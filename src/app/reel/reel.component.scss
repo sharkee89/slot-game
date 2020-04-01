@@ -11,6 +11,7 @@ img {
     left: 50%;
     width: 100%;
     transform: translate(-50%, -6%);
+    background-image: linear-gradient(to right, lightgray , #ffffff, lightgray);
     &__symbol {
         position: relative;
         display: grid;

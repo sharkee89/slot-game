@@ -2,3 +2,30 @@
 body {
     background-color: cadetblue;
 }
+
+.right-container {
+    // padding: 2.5em;
+    &__win {
+        position: relative;
+        border: 3px solid orange;
+        // padding: 2em 4em;
+        border-radius: 15px;
+        color: gold;
+        &--label {
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-image: linear-gradient(to right, orange , gold, orange);
+            color: #ffffff;
+            border-radius: 15px;
+            padding: .5em 1em;
+            font-size: 1.25em;
+        }
+        &--value {
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+        }
+    }
+}

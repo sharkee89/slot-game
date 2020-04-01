@@ -1,8 +1,4 @@
-::host {
-    background-color: red;
-}
 .game-container {
-    background-color: gray;
     position: fixed;
     width: 80%;
     height: 70%;
@@ -11,11 +7,11 @@
     left: 50%;
     &__play {
         position: relative;
-        background-color: purple;
+        background-color: darkslategray;
         height: 80%;
     }
     &__buttons {
-        background-color: blue;
+        background-image: linear-gradient(to right, darkblue , midnightblue, darkblue);
         height: 20%;
     }
 }

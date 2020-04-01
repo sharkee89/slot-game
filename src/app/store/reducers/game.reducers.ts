@@ -72,7 +72,6 @@ export const gameReducers = (
             break;
         }
         case EGameActions.SetResultCounter: {
-            console.log(action.payload);
             return {
                 ...state,
                 game: {

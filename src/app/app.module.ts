@@ -11,6 +11,9 @@ import { ReelComponent } from './reel/reel.component';
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './store/reducers/app.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { WinComponent } from './win/win.component';
+import { BalanceComponent } from './balance/balance.component';
+import { BetComponent } from './bet/bet.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     PlayComponent,
     ButtonsComponent,
     ReelSetComponent,
-    ReelComponent
+    ReelComponent,
+    WinComponent,
+    BalanceComponent,
+    BetComponent
   ],
   imports: [
     BrowserModule,
