@@ -1,0 +1,28 @@
+body {
+    background-color: cadetblue;
+}
+
+.right-container {
+        padding: .5em;
+        text-align: center;
+        color: orange;
+    &__win {
+        position: relative;
+        border: 1.5px solid orange;
+        border-radius: 5px;
+        padding: 1em 0;
+        &--label {
+            position: absolute;
+            top: -25%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-image: linear-gradient(to right, orange , gold, orange);
+            color: #ffffff;
+            border-radius: 5px;
+            padding: .25em 1em;
+        }
+        &--value {
+            font-weight: bold;
+        }
+    }
+}

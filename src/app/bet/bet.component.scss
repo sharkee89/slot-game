@@ -6,22 +6,45 @@
     font-size: 2em;
     &__min {
         width: 7%;
+        border-left: 3px solid crimson;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
     }
     &__value {
         text-align: center;
         width: 40%;
         background-color: crimson;
-        border-radius: 5px;
+        border-top: 3px solid orange;
+        border-bottom: 3px solid orange;
     }
     &__max {
         width: 7%;
+        border-right: 3px solid crimson;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
     }
     & .mm {
-        border: 1px solid orange;
+        width: 23%;
         background-image: linear-gradient(to right, orange , gold, orange);
-        border-radius: 5px;
         text-align: center;
         font-weight: bold;
         cursor: pointer;
+        outline: 0;
+        -moz-outline-style: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        outline: 0;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .bet-container {
+        & .mm {
+            width: 15%;
+        }
     }
 }
