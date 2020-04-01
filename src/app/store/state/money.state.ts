@@ -7,7 +7,7 @@ export interface IMoneyState {
 export const initialMoneyState: IMoneyState = {
     money: {
         bet: 0,
-        balance: 5000,
+        balance: 50,
         win: 0
     }
 };

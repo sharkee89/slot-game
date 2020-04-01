@@ -6,4 +6,13 @@
     </div>
     <app-balance></app-balance>
     <app-win></app-win>
+    <div *ngIf="balance <= 0 && !spinDisabled">
+        <div class="layer"></div>
+        <div class="modal">
+            <div class="modal__title">Game Over</div>
+            <div class="modal__buttons">
+                <button (click)="startNewGame()">Ok</button>
+            </div>
+        </div>
+    </div>
 </div>

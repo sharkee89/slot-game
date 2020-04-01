@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IAppState } from '../store/state/app.state';
 import { Store } from '@ngrx/store';
-import { SetSpinning, SetSpinDisabled } from '../store/actions/game.actions';
+import { SetSpinning } from '../store/actions/game.actions';
 import { ReplaySubject } from 'rxjs';
 import { selectSpinDisabled } from '../store/selectors/game.selectors';
 import { takeUntil } from 'rxjs/operators';
 import { playAudio } from '../helpers/general.helper';
-import { selectBet, selectBetAndBalance } from '../store/selectors/money.selectors';
+import { selectBetAndBalance } from '../store/selectors/money.selectors';
 import { StartBet } from '../store/actions/money.actions';
 
 @Component({
@@ -47,7 +47,11 @@ export class ButtonsComponent implements OnInit, OnDestroy {
     this.store.dispatch(new SetSpinning(false));
   }
 
-  subscribeToSpinDisabled() {
+  startNewGame() {
+    window.location.reload();
+  }
+
+  private subscribeToSpinDisabled() {
     this.store.select(selectSpinDisabled)
       .pipe(takeUntil(this.spinDisabledDestroyed$))
       .subscribe((spinDis) => {
@@ -56,7 +60,7 @@ export class ButtonsComponent implements OnInit, OnDestroy {
       });
   }
 
-  subscribeToBet() {
+  private subscribeToBet() {
     this.store.select(selectBetAndBalance)
       .pipe(takeUntil(this.betDestroyed$))
       .subscribe((res) => {
