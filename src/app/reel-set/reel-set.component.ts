@@ -8,6 +8,8 @@ import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SetSpinDisabled, SetResultCounter } from '../store/actions/game.actions';
 import { playAudio } from '../helpers/general.helper';
+import { WinBet } from '../store/actions/money.actions';
+import { selectBet } from '../store/selectors/money.selectors';
 
 @Component({
   selector: 'app-reel-set',
@@ -20,11 +22,13 @@ export class ReelSetComponent implements OnInit, OnDestroy {
   reelsNumber: number = CONSTANTS.REELS;
   reels: any[];
   spinDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  betDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   resultSetCounter = 0;
   winningLines;
   winningCombinations = [];
   lines = CONSTANTS.LINES;
   audio = new Audio();
+  bet: number;
 
   constructor(
     private store: Store<IAppState>,
@@ -34,25 +38,36 @@ export class ReelSetComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscribeToSpin();
+    this.subscribeToBet();
   }
 
   ngOnDestroy() {
     this.spinDestroyed$.next(true);
     this.spinDestroyed$.complete();
+    this.betDestroyed$.next(true);
+    this.betDestroyed$.complete();
   }
 
   onSpin() {
   }
 
-  private subscribeToGame() {
-    this.store.select(selectSpinning)
-      .pipe(takeUntil(this.spinDestroyed$))
-      .subscribe((spinning) => {
-        if (spinning) {
-          this.reelsComp.forEach((reel, idx) => {
-            reel.spin(idx);
-          });
-        }
+  // private subscribeToGame() {
+  //   this.store.select(selectSpinning)
+  //     .pipe(takeUntil(this.spinDestroyed$))
+  //     .subscribe((spinning) => {
+  //       if (spinning) {
+  //         this.reelsComp.forEach((reel, idx) => {
+  //           reel.spin(idx);
+  //         });
+  //       }
+  //     });
+  // }
+
+  subscribeToBet(): void {
+    this.store.select(selectBet)
+      .pipe(takeUntil(this.betDestroyed$))
+      .subscribe((bet) => {
+        this.bet = bet;
       });
   }
 
@@ -119,6 +134,7 @@ export class ReelSetComponent implements OnInit, OnDestroy {
   }
 
   private highlightWinningSymbols(combination, last) {
+    this.store.dispatch(new WinBet(3 * this.bet));
     setTimeout(() => {
       this.highlight(combination, true);
       playAudio('assets/sounds/win.mp3', this.audio);

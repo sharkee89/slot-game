@@ -15,6 +15,24 @@ export const moneyReducers = (
                 }
             };
         }
+        case EMoneyActions.StartBet: {
+            return {
+                ...state,
+                money: {
+                    ...state.money,
+                    balance: state.money.balance - action.payload
+                }
+            };
+        }
+        case EMoneyActions.WinBet: {
+            return {
+                ...state,
+                money: {
+                    ...state.money,
+                    balance: state.money.balance + action.payload
+                }
+            }
+        }
         default:
             return state;
     }

@@ -1,7 +1,8 @@
 <div class="buttons-container">
     <app-bet></app-bet>
-    <div class="buttons-container__btn">
-        <button (click)="handleSpin()" class="push_button blue" [disabled]="spinDisabled">Spin</button>
+    <div class="buttons-container__btn"
+        [ngClass]="{'rotated': rotatedButton}">
+        <button (click)="handleSpin()" class="push_button blue" [disabled]="spinDisabled || (bet <= 0 || bet > balance)">Spin</button>
     </div>
     <app-balance></app-balance>
     <app-win></app-win>

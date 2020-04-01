@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IAppState } from '../store/state/app.state';
 import { SetBet } from '../store/actions/money.actions';
@@ -11,7 +11,7 @@ import { selectBet } from '../store/selectors/money.selectors';
   templateUrl: './bet.component.html',
   styleUrls: ['./bet.component.scss']
 })
-export class BetComponent implements OnInit {
+export class BetComponent implements OnInit, OnDestroy {
 
   bet: number;
   betDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
@@ -38,8 +38,6 @@ export class BetComponent implements OnInit {
   }
 
   setBet(value: number): void {
-    console.log(this.bet);
-    console.log(value);
     this.store.dispatch(new SetBet(this.bet + value));
   }
 
