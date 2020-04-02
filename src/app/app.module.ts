@@ -14,6 +14,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { WinComponent } from './win/win.component';
 import { BalanceComponent } from './balance/balance.component';
 import { BetComponent } from './bet/bet.component';
+import { CurrencyPipe } from './pipes/currency.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BetComponent } from './bet/bet.component';
     ReelComponent,
     WinComponent,
     BalanceComponent,
-    BetComponent
+    BetComponent,
+    CurrencyPipe
   ],
   imports: [
     BrowserModule,

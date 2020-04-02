@@ -29,7 +29,8 @@ export const moneyReducers = (
                 ...state,
                 money: {
                     ...state.money,
-                    balance: state.money.balance + action.payload
+                    balance: state.money.balance + action.payload,
+                    win: state.money.win + action.payload
                 }
             };
         }

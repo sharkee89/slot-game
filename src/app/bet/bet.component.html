@@ -1,5 +1,5 @@
 <div class="bet-container">
     <button class="bet-container__min mm" (click)="setBet(-10)" [disabled]="bet <= 0 || betDisabled">-</button>
-    <div class="bet-container__value">{{bet}}</div>
+    <div class="bet-container__value">{{bet | currency}}</div>
     <button class="bet-container__max mm" (click)="setBet(10)" [disabled]="bet >= balance || betDisabled">+</button>
 </div>
