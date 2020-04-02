@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, QueryList, ViewChildren } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CONSTANTS } from '../config/constants';
 import { playAudio } from '../helpers/general.helper';

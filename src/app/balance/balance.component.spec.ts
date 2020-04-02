@@ -26,4 +26,19 @@ describe('BalanceComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should ngOnInit correctly', () => {
+    spyOn((component as any), 'subscribeToBalance');
+    component.ngOnInit();
+    expect((component as any).subscribeToBalance).toHaveBeenCalled();
+  });
+
+  it('should ngOnDestroy correctly', () => {
+    spyOn(component.balanceDestroyed$, 'next');
+    spyOn(component.balanceDestroyed$, 'complete');
+    component.ngOnDestroy();
+    expect(component.balanceDestroyed$.next).toHaveBeenCalledWith(true);
+    expect(component.balanceDestroyed$.complete).toHaveBeenCalled();
+  });
+
 });

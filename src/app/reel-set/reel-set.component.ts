@@ -3,13 +3,13 @@ import { Store } from '@ngrx/store';
 import { CONSTANTS } from 'src/app/config/constants';
 import { playAudio } from '../helpers/general.helper';
 import { ReelComponent } from '../reel/reel.component';
+import { ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { SetSpinDisabled, SetResultCounter } from '../store/actions/game.actions';
 import { WinBet } from '../store/actions/money.actions';
 import { selectGameObject } from '../store/selectors/game.selectors';
 import { selectBet } from '../store/selectors/money.selectors';
 import { IAppState } from '../store/state/app.state';
-import { ReplaySubject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-reel-set',

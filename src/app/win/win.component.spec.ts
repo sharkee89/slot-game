@@ -26,4 +26,18 @@ describe('WinComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should ngOnInit correctly', () => {
+    spyOn((component as any), 'subscribeToWin');
+    component.ngOnInit();
+    expect((component as any).subscribeToWin).toHaveBeenCalled();
+  });
+
+  it('should ngOnDestroy correctly', () => {
+    spyOn(component.winDestroyed$, 'next');
+    spyOn(component.winDestroyed$, 'complete');
+    component.ngOnDestroy();
+    expect(component.winDestroyed$.next).toHaveBeenCalledWith(true);
+    expect(component.winDestroyed$.complete).toHaveBeenCalled();
+  });
 });
