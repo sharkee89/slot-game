@@ -35,7 +35,11 @@ export class ReelComponent implements OnInit {
   highlightAtIndex(combination, validity) {
     this.symbolComp.forEach((symbol, index) => {
       if ((this.startIndex + combination[1]) === index) {
-        this.renderer.setStyle(symbol.nativeElement, 'background-color', validity ? 'rgba(0, 255, 125)' : 'transparent');
+        if (validity) {
+          this.renderer.addClass(symbol.nativeElement, 'win');
+        } else {
+          this.renderer.removeClass(symbol.nativeElement, 'win');
+        }
       }
     });
   }

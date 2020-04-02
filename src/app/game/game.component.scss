@@ -1,7 +1,7 @@
 .game-container {
     position: fixed;
     width: 95%;
-    height: 95%;
+    height: 80%;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
@@ -9,6 +9,12 @@
         position: relative;
         background-color: darkslategray;
         height: 60%;
+        border-radius: 5px;
+        border-left-width: 5px;
+        border-left-style: solid;
+        border-right-width: 5px;
+        border-right-style: solid;
+        border-image: linear-gradient( to bottom, crimson, orange ) 1 100%;
     }
     &__buttons {
         background-image: linear-gradient(to right, darkblue , midnightblue, darkblue);
