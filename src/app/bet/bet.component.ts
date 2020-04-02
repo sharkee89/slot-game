@@ -24,12 +24,12 @@ export class BetComponent implements OnInit, OnDestroy {
     private store: Store<IAppState>,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscribeToBet();
     this.subscribeToSpinDisabled();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.betDestroyed$.next(true);
     this.betDestroyed$.complete();
     this.spinDisabledDestroyed$.next(true);
@@ -45,7 +45,7 @@ export class BetComponent implements OnInit, OnDestroy {
       });
   }
 
-  private subscribeToSpinDisabled() {
+  private subscribeToSpinDisabled(): void {
     this.store.select(selectSpinDisabled)
       .pipe(takeUntil(this.spinDisabledDestroyed$))
       .subscribe((spinDis) => {

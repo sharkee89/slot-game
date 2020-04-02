@@ -15,11 +15,11 @@ export class ReelComponent implements OnInit {
   @ViewChild('reelContainer', null) reelContainer: ElementRef;
   @ViewChildren('symbolComp') symbolComp: QueryList<ElementRef>;
   symbolsNumber: number = CONSTANTS.SYMBOLS;
-  symbols = '';
-  reelConfiguration = [];
-  showReelContainer = false;
-  spinDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   startIndex;
+  symbols = '';
+  showReelContainer = false;
+  reelConfiguration = [];
+  spinDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   audio = new Audio();
 
   constructor(
@@ -27,12 +27,12 @@ export class ReelComponent implements OnInit {
     private renderer: Renderer2
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initSymbols();
     this.initReelConfiguration(this.symbols);
   }
 
-  highlightAtIndex(combination, validity) {
+  highlightAtIndex(combination, validity): void {
     this.symbolComp.forEach((symbol, index) => {
       if ((this.startIndex + combination[1]) === index) {
         if (validity) {
@@ -44,11 +44,11 @@ export class ReelComponent implements OnInit {
     });
   }
 
-  spin(idx: number) {
+  spin(idx: number): void {
     this.startSpinning(idx);
   }
 
-  private initSymbols() {
+  private initSymbols(): void {
     let result = '';
     for (let i = 0; i < CONSTANTS.SYMBOLS_LENGTH; i++) {
       const choice = Math.floor(Math.random() * 6) + 1;
@@ -58,7 +58,7 @@ export class ReelComponent implements OnInit {
     this.symbols = result;
   }
 
-  private initReelConfiguration(symbols) {
+  private initReelConfiguration(symbols): void {
     for (let i = 0; i < symbols.length; i++) {
       switch (symbols.charAt(i)) {
         case 'A':
@@ -86,7 +86,7 @@ export class ReelComponent implements OnInit {
     }
   }
 
-  private startSpinning(idx: number) {
+  private startSpinning(idx: number): void {
     const choice = Math.floor(Math.random() * 6) + 1;
     const result = 6 + 4 * choice;
     let counter = -6;
@@ -102,7 +102,7 @@ export class ReelComponent implements OnInit {
     }, (idx * 250) + 1250);
   }
 
-  private afterRolling(idx, inter, result) {
+  private afterRolling(idx, inter, result): void {
     playAudio('assets/sounds/check.wav', this.audio);
     clearInterval(inter);
     this.renderer.setStyle(this.reelContainer.nativeElement, 'transform', 'translate(-50%, -' + result + '%)');
@@ -116,7 +116,7 @@ export class ReelComponent implements OnInit {
     this.store.dispatch(new SetResult({result: results, index: idx}));
   }
 
-  private getResultSymbol(result) {
+  private getResultSymbol(result): string {
     switch (result.image) {
       case 'card':
         return 'A';

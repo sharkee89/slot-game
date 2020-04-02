@@ -19,11 +19,11 @@ export class WinComponent implements OnInit, OnDestroy {
     private store: Store<IAppState>,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscribeToWin();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.winDestroyed$.next(true);
     this.winDestroyed$.complete();
   }

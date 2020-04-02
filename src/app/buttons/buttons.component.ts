@@ -28,30 +28,30 @@ export class ButtonsComponent implements OnInit, OnDestroy {
     private store: Store<IAppState>
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscribeToSpinDisabled();
     this.subscribeToBet();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.spinDisabledDestroyed$.next(true);
     this.spinDisabledDestroyed$.complete();
     this.betDestroyed$.next(true);
     this.betDestroyed$.complete();
   }
 
-  handleSpin() {
+  handleSpin(): void {
     playAudio('assets/sounds/rolling.mp3', this.audio);
     this.store.dispatch(new SetSpinning(true));
     this.store.dispatch(new StartBet(this.bet));
     this.store.dispatch(new SetSpinning(false));
   }
 
-  startNewGame() {
+  startNewGame(): void {
     window.location.reload();
   }
 
-  private subscribeToSpinDisabled() {
+  private subscribeToSpinDisabled(): void {
     this.store.select(selectSpinDisabled)
       .pipe(takeUntil(this.spinDisabledDestroyed$))
       .subscribe((spinDis) => {
@@ -60,7 +60,7 @@ export class ButtonsComponent implements OnInit, OnDestroy {
       });
   }
 
-  private subscribeToBet() {
+  private subscribeToBet(): void {
     this.store.select(selectBetAndBalance)
       .pipe(takeUntil(this.betDestroyed$))
       .subscribe((res) => {

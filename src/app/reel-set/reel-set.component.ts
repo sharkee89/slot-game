@@ -37,12 +37,12 @@ export class ReelSetComponent implements OnInit, OnDestroy {
     this.reels = Array(this.reelsNumber).fill(null);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscribeToSpin();
     this.subscribeToBet();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.spinDestroyed$.next(true);
     this.spinDestroyed$.complete();
     this.betDestroyed$.next(true);
@@ -57,7 +57,7 @@ export class ReelSetComponent implements OnInit, OnDestroy {
       });
   }
 
-  private subscribeToSpin() {
+  private subscribeToSpin(): void {
     this.store.select(selectGameObject)
       .pipe(takeUntil(this.spinDestroyed$))
       .subscribe((game) => {
@@ -80,7 +80,7 @@ export class ReelSetComponent implements OnInit, OnDestroy {
       });
   }
 
-  private evaluateResults(spinResults) {
+  private evaluateResults(spinResults): void {
     this.winningLines = [];
     this.winningCombinations = [];
     for (let lineIdx = 0; lineIdx < this.lines.length; lineIdx++) {
@@ -118,7 +118,7 @@ export class ReelSetComponent implements OnInit, OnDestroy {
     }
   }
 
-  private highlightWinningSymbols(combination, last) {
+  private highlightWinningSymbols(combination, last): void {
     this.store.dispatch(new WinBet(3 * this.bet));
     setTimeout(() => {
       this.highlight(combination, true);
@@ -132,7 +132,7 @@ export class ReelSetComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
-  private highlight(combination, validity) {
+  private highlight(combination, validity): void {
     combination.forEach(comb => {
       this.reelsComp.forEach((reel, idx) => {
         if (idx === comb[0]) {
