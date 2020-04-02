@@ -1,10 +1,27 @@
 .game-container {
     position: fixed;
     width: 95%;
-    height: 80%;
+    height: 75%;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+    animation-iteration-count:infinite;
+    animation-name: containerflash;
+    animation-duration: 5s;
+    &__logo {
+        position: absolute;
+        top: -75px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        width: 140px;
+        z-index: 9;
+        & img {
+            animation-iteration-count:infinite;
+            animation-name: logoflash;
+            animation-duration: 5s;
+        }
+    }
     &__play {
         position: relative;
         background-color: darkslategray;
@@ -25,12 +42,40 @@
 @media only screen and (min-width: 768px) {
     .game-container {
         width: 90%;
-        height: 85%;
+        height: 80%;
         &__play {
             height: 70%;
         }
         &__buttons {
             height: 30%;
         }
+    }
+}
+@keyframes containerflash {
+    0% {
+        box-shadow: none;
+    }
+    50% {
+        box-shadow: 0px 0px 50px 30px orange;
+    }
+    100% {
+        box-shadow: none;
+    }
+}
+@keyframes logoflash {
+    0% {
+        -webkit-filter: none;
+        filter: none;
+        transform: scale(1);
+    }
+    50% {
+        -webkit-filter: drop-shadow(0px 0px 9px lime);
+        filter: drop-shadow(0px 0px 9px lime);
+        transform: scale(1.05);
+    }
+    100% {
+        -webkit-filter: none;
+        filter: none;
+        transform: scale(1);
     }
 }
