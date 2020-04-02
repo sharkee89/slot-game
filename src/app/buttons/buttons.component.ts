@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IAppState } from '../store/state/app.state';
 import { Store } from '@ngrx/store';
-import { SetSpinning } from '../store/actions/game.actions';
-import { ReplaySubject } from 'rxjs';
-import { selectSpinDisabled } from '../store/selectors/game.selectors';
-import { takeUntil } from 'rxjs/operators';
 import { playAudio } from '../helpers/general.helper';
-import { selectBetAndBalance } from '../store/selectors/money.selectors';
+import { SetSpinning } from '../store/actions/game.actions';
 import { StartBet } from '../store/actions/money.actions';
+import { selectSpinDisabled } from '../store/selectors/game.selectors';
+import { selectBetAndBalance } from '../store/selectors/money.selectors';
+import { IAppState } from '../store/state/app.state';
+import { ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-buttons',
@@ -19,10 +19,10 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   spinDisabled: boolean;
   bet: number;
   balance: number;
+  rotatedButton = false;
   spinDisabledDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   betDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   audio = new Audio();
-  rotatedButton = false;
 
   constructor(
     private store: Store<IAppState>

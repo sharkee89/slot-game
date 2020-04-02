@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild, QueryList, ViewChildren, OnDestroy } from '@angular/core';
-import { CONSTANTS } from 'src/app/config/constants';
-import { ReelComponent } from '../reel/reel.component';
-import { IAppState } from '../store/state/app.state';
+import { Component, OnInit, QueryList, ViewChildren, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectSpinning, selectGameObject } from '../store/selectors/game.selectors';
+import { CONSTANTS } from 'src/app/config/constants';
+import { playAudio } from '../helpers/general.helper';
+import { ReelComponent } from '../reel/reel.component';
+import { SetSpinDisabled, SetResultCounter } from '../store/actions/game.actions';
+import { WinBet } from '../store/actions/money.actions';
+import { selectGameObject } from '../store/selectors/game.selectors';
+import { selectBet } from '../store/selectors/money.selectors';
+import { IAppState } from '../store/state/app.state';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { SetSpinDisabled, SetResultCounter } from '../store/actions/game.actions';
-import { playAudio } from '../helpers/general.helper';
-import { WinBet } from '../store/actions/money.actions';
-import { selectBet } from '../store/selectors/money.selectors';
 
 @Component({
   selector: 'app-reel-set',
@@ -20,15 +20,16 @@ export class ReelSetComponent implements OnInit, OnDestroy {
 
   @ViewChildren('reelComp') reelsComp: QueryList<ReelComponent>;
   reelsNumber: number = CONSTANTS.REELS;
+  lines = CONSTANTS.LINES;
   reels: any[];
+  bet: number;
+  resultSetCounter = 0;
+  winningCombinations = [];
+  winningLines;
   spinDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   betDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
-  resultSetCounter = 0;
-  winningLines;
-  winningCombinations = [];
-  lines = CONSTANTS.LINES;
   audio = new Audio();
-  bet: number;
+
 
   constructor(
     private store: Store<IAppState>,
@@ -48,22 +49,7 @@ export class ReelSetComponent implements OnInit, OnDestroy {
     this.betDestroyed$.complete();
   }
 
-  onSpin() {
-  }
-
-  // private subscribeToGame() {
-  //   this.store.select(selectSpinning)
-  //     .pipe(takeUntil(this.spinDestroyed$))
-  //     .subscribe((spinning) => {
-  //       if (spinning) {
-  //         this.reelsComp.forEach((reel, idx) => {
-  //           reel.spin(idx);
-  //         });
-  //       }
-  //     });
-  // }
-
-  subscribeToBet(): void {
+  private subscribeToBet(): void {
     this.store.select(selectBet)
       .pipe(takeUntil(this.betDestroyed$))
       .subscribe((bet) => {
@@ -88,7 +74,6 @@ export class ReelSetComponent implements OnInit, OnDestroy {
             game.resultFour,
             game.resultFive
           ];
-          console.log(game.resultSetCounter);
           this.evaluateResults(spinningResults);
           this.store.dispatch(new SetResultCounter(0));
         }
@@ -156,33 +141,5 @@ export class ReelSetComponent implements OnInit, OnDestroy {
       });
     });
   }
-
-  // private highlightWinningLines(currentIndex) {
-  //   if (!this.winningLines.length) {
-  //     return;
-  //   }
-  //   if (currentIndex > 0) {
-  //     this.lines[this.winningLines[currentIndex - 1]].map((el) => {
-  //       this.reelsComp.forEach((reel, index) => {
-  //         if (el[0] === index) {
-  //           reel.highlightAtIndex(el[1], false);
-  //         }
-  //       })
-  //     });
-  //   }
-  //   if (currentIndex > this.winningLines.length - 1) {
-  //     return;
-  //   }
-  //   this.lines[this.winningLines[currentIndex]].map((el) => {
-  //     this.reelsComp.forEach((reel, index) => {
-  //       if (el[0] === index) {
-  //         reel.highlightAtIndex(el[1], true);
-  //       }
-  //     })
-  //   });
-  //   setTimeout(() => {
-  //     this.highlightWinningLines(currentIndex + 1);
-  //   }, 800);
-  // }
 
 }

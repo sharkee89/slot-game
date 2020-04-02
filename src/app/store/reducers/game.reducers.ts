@@ -5,7 +5,7 @@ export const gameReducers = (
     state = initialGameState,
     action: GameActions
 ): IGameState => {
-    switch(action.type) {
+    switch (action.type) {
         case EGameActions.GetGame: {
             return {
                 ...state
@@ -22,7 +22,7 @@ export const gameReducers = (
             };
         }
         case EGameActions.SetResult: {
-            switch(action.payload.index) {
+            switch (action.payload.index) {
                 case 0:
                     return {
                         ...state,
@@ -78,7 +78,7 @@ export const gameReducers = (
                     ...state.game,
                     resultSetCounter: action.payload
                 },
-            }
+            };
         }
         case EGameActions.SetSpinDisabled: {
             return {

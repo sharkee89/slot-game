@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
-import { CONSTANTS } from '../config/constants';
-import { ReplaySubject } from 'rxjs';
-import { IAppState } from '../store/state/app.state';
 import { Store } from '@ngrx/store';
-import { SetResult } from '../store/actions/game.actions';
+import { CONSTANTS } from '../config/constants';
 import { playAudio } from '../helpers/general.helper';
+import { SetResult } from '../store/actions/game.actions';
+import { IAppState } from '../store/state/app.state';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-reel',
@@ -14,7 +14,6 @@ import { playAudio } from '../helpers/general.helper';
 export class ReelComponent implements OnInit {
   @ViewChild('reelContainer', null) reelContainer: ElementRef;
   @ViewChildren('symbolComp') symbolComp: QueryList<ElementRef>;
-
   symbolsNumber: number = CONSTANTS.SYMBOLS;
   symbols = '';
   reelConfiguration = [];
@@ -33,15 +32,16 @@ export class ReelComponent implements OnInit {
     this.initReelConfiguration(this.symbols);
   }
 
-  onSpin() {
-  }
-
   highlightAtIndex(combination, validity) {
     this.symbolComp.forEach((symbol, index) => {
       if ((this.startIndex + combination[1]) === index) {
         this.renderer.setStyle(symbol.nativeElement, 'background-color', validity ? 'rgba(0, 255, 125)' : 'transparent');
       }
     });
+  }
+
+  spin(idx: number) {
+    this.startSpinning(idx);
   }
 
   private initSymbols() {
@@ -56,7 +56,7 @@ export class ReelComponent implements OnInit {
 
   private initReelConfiguration(symbols) {
     for (let i = 0; i < symbols.length; i++) {
-      switch(symbols.charAt(i)) {
+      switch (symbols.charAt(i)) {
         case 'A':
           this.reelConfiguration.unshift({image: 'card'});
           break;
@@ -82,16 +82,9 @@ export class ReelComponent implements OnInit {
     }
   }
 
-  spin(idx: number) {
-    // this.initSymbols();
-    // this.initReelConfiguration(this.symbols);
-    this.startSpinning(idx);
-  }
-
   private startSpinning(idx: number) {
     const choice = Math.floor(Math.random() * 6) + 1;
     const result = 6 + 4 * choice;
-    console.log(`Result: ${result}`);
     let counter = -6;
     const inter = setInterval(() => {
       if (counter === -94) {
@@ -110,7 +103,7 @@ export class ReelComponent implements OnInit {
     clearInterval(inter);
     this.renderer.setStyle(this.reelContainer.nativeElement, 'transform', 'translate(-50%, -' + result + '%)');
     let c = (Math.abs(result) - 6) / 4;
-    this.startIndex = (Math.abs(result) - 6) / 4;;
+    this.startIndex = (Math.abs(result) - 6) / 4;
     const results = [];
     for (let i = 0; i < 3; i++) {
       results.push(this.getResultSymbol(this.reelConfiguration[c]));
@@ -119,12 +112,8 @@ export class ReelComponent implements OnInit {
     this.store.dispatch(new SetResult({result: results, index: idx}));
   }
 
-  private getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
   private getResultSymbol(result) {
-    switch(result.image) {
+    switch (result.image) {
       case 'card':
         return 'A';
       case 'bonus':

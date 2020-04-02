@@ -5,7 +5,7 @@ export const moneyReducers = (
     state = initialMoneyState,
     action: MoneyActions
 ): IMoneyState => {
-    switch(action.type) {
+    switch (action.type) {
         case EMoneyActions.SetBet: {
             return {
                 ...state,
@@ -31,7 +31,7 @@ export const moneyReducers = (
                     ...state.money,
                     balance: state.money.balance + action.payload
                 }
-            }
+            };
         }
         default:
             return state;

@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ReelSetComponent } from '../reel-set/reel-set.component';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-play',
@@ -8,15 +7,9 @@ import { ReelSetComponent } from '../reel-set/reel-set.component';
 })
 export class PlayComponent implements OnInit {
 
-  @ViewChild(ReelSetComponent, null) reelSetComponent: ReelSetComponent;
-
   constructor() { }
 
   ngOnInit() {
-  }
-
-  onSpin() {
-    this.reelSetComponent.onSpin();
   }
 
 }

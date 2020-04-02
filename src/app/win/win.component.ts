@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IAppState } from '../store/state/app.state';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { selectWin } from '../store/selectors/money.selectors';
+import { IAppState } from '../store/state/app.state';
 
 @Component({
   selector: 'app-win',
@@ -28,7 +28,7 @@ export class WinComponent implements OnInit, OnDestroy {
     this.winDestroyed$.complete();
   }
 
-  subscribeToWin(): void {
+  private subscribeToWin(): void {
     this.store.select(selectWin)
       .pipe(takeUntil(this.winDestroyed$))
       .subscribe((win) => {

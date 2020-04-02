@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IAppState } from '../store/state/app.state';
-import { SetBet } from '../store/actions/money.actions';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { selectBetAndBalance } from '../store/selectors/money.selectors';
+import { SetBet } from '../store/actions/money.actions';
 import { selectSpinDisabled } from '../store/selectors/game.selectors';
+import { selectBetAndBalance } from '../store/selectors/money.selectors';
+import { IAppState } from '../store/state/app.state';
 
 @Component({
   selector: 'app-bet',

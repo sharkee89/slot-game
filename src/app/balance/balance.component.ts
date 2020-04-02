@@ -28,7 +28,7 @@ export class BalanceComponent implements OnInit, OnDestroy {
     this.balanceDestroyed$.complete();
   }
 
-  subscribeToBalance(): void {
+  private subscribeToBalance(): void {
     this.store.select(selectBalance)
       .pipe(takeUntil(this.balanceDestroyed$))
       .subscribe((balance) => {
