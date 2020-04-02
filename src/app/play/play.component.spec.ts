@@ -1,6 +1,10 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { StoreModule } from '@ngrx/store';
 import { PlayComponent } from './play.component';
+import { ReelComponent } from '../reel/reel.component';
+import { ReelSetComponent } from '../reel-set/reel-set.component';
+import { appReducers } from '../store/reducers/app.reducers';
 
 describe('PlayComponent', () => {
   let component: PlayComponent;
@@ -8,7 +12,17 @@ describe('PlayComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayComponent ]
+      declarations: [
+        PlayComponent,
+        ReelComponent,
+        ReelSetComponent
+      ],
+      imports: [
+        StoreModule.forRoot(appReducers)
+      ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ]
     })
     .compileComponents();
   }));

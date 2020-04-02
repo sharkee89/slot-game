@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { StoreModule } from '@ngrx/store';
 import { BalanceComponent } from './balance.component';
+import { appReducers } from '../store/reducers/app.reducers';
 
 describe('BalanceComponent', () => {
   let component: BalanceComponent;
@@ -8,7 +9,10 @@ describe('BalanceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BalanceComponent ]
+      declarations: [ BalanceComponent ],
+      imports: [
+        StoreModule.forRoot(appReducers)
+      ]
     })
     .compileComponents();
   }));

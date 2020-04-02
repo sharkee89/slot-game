@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { StoreModule } from '@ngrx/store';
 import { ReelComponent } from './reel.component';
+import { appReducers } from '../store/reducers/app.reducers';
 
 describe('ReelComponent', () => {
   let component: ReelComponent;
@@ -8,7 +9,10 @@ describe('ReelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReelComponent ]
+      declarations: [ ReelComponent ],
+      imports: [
+        StoreModule.forRoot(appReducers)
+      ]
     })
     .compileComponents();
   }));

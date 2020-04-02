@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BetComponent } from './bet.component';
+import { StoreModule } from '@ngrx/store';
+import { appReducers } from '../store/reducers/app.reducers';
 
 describe('BetComponent', () => {
   let component: BetComponent;
@@ -8,7 +10,10 @@ describe('BetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BetComponent ]
+      declarations: [ BetComponent ],
+      imports: [
+        StoreModule.forRoot(appReducers)
+      ]
     })
     .compileComponents();
   }));
