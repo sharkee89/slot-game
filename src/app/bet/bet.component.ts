@@ -4,7 +4,8 @@ import { IAppState } from '../store/state/app.state';
 import { SetBet } from '../store/actions/money.actions';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { selectBet } from '../store/selectors/money.selectors';
+import { selectBetAndBalance } from '../store/selectors/money.selectors';
+import { selectSpinDisabled } from '../store/selectors/game.selectors';
 
 @Component({
   selector: 'app-bet',
@@ -14,7 +15,10 @@ import { selectBet } from '../store/selectors/money.selectors';
 export class BetComponent implements OnInit, OnDestroy {
 
   bet: number;
+  balance: number;
+  betDisabled: boolean;
   betDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  spinDisabledDestroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
   constructor(
     private store: Store<IAppState>,
@@ -22,18 +26,30 @@ export class BetComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscribeToBet();
+    this.subscribeToSpinDisabled();
   }
 
   ngOnDestroy() {
     this.betDestroyed$.next(true);
     this.betDestroyed$.complete();
+    this.spinDisabledDestroyed$.next(true);
+    this.spinDisabledDestroyed$.complete();
   }
 
-  subscribeToBet(): void {
-    this.store.select(selectBet)
+  private subscribeToBet(): void {
+    this.store.select(selectBetAndBalance)
       .pipe(takeUntil(this.betDestroyed$))
-      .subscribe((bet) => {
-        this.bet = bet;
+      .subscribe((res) => {
+        this.bet = res.bet;
+        this.balance = res.balance;
+      });
+  }
+
+  private subscribeToSpinDisabled() {
+    this.store.select(selectSpinDisabled)
+      .pipe(takeUntil(this.spinDisabledDestroyed$))
+      .subscribe((spinDis) => {
+        this.betDisabled = spinDis;
       });
   }
 

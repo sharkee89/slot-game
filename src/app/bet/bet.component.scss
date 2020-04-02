@@ -38,6 +38,14 @@
         -ms-user-select: none;
         user-select: none;
         outline: 0;
+        border: none;
+        color: #ffffff;
+        &[disabled] {
+            color: crimson;
+            background-image: linear-gradient(to right, crimson, crimson, crimson);
+            border-top: 3px solid orange;
+            border-bottom: 3px solid orange;
+        }
     }
 }
 
