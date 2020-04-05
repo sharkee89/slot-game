@@ -1,19 +1,21 @@
-import { IGame } from '../model/game';
-
 export interface IGameState {
-    game: IGame;
+    spinning: boolean;
+    resultOne: any[];
+    resultTwo: any[];
+    resultThree: any[];
+    resultFour: any[];
+    resultFive: any[];
+    resultSetCounter: number;
     spinDisabled: boolean;
 }
 
 export const initialGameState: IGameState = {
-    game: {
-        spinning: false,
-        resultOne: [],
-        resultTwo: [],
-        resultThree: [],
-        resultFour: [],
-        resultFive: [],
-        resultSetCounter: 0,
-    },
+    spinning: false,
+    resultOne: [],
+    resultTwo: [],
+    resultThree: [],
+    resultFour: [],
+    resultFive: [],
+    resultSetCounter: 0,
     spinDisabled: false
 };

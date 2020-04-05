@@ -1,13 +1,11 @@
-import { IMoney } from '../model/money';
-
 export interface IMoneyState {
-    money: IMoney;
+    bet: number;
+    balance: number;
+    win: number;
 }
 
 export const initialMoneyState: IMoneyState = {
-    money: {
-        bet: 0,
-        balance: 100,
-        win: 0
-    }
+    bet: 0,
+    balance: 100,
+    win: 0
 };

@@ -14,10 +14,7 @@ export const gameReducers = (
         case EGameActions.SetSpinning: {
             return {
                 ...state,
-                game: {
-                    ...state.game,
-                    spinning: action.payload,
-                },
+                spinning: action.payload,
                 spinDisabled: true
             };
         }
@@ -26,47 +23,32 @@ export const gameReducers = (
                 case 0:
                     return {
                         ...state,
-                        game: {
-                            ...state.game,
-                            resultOne: action.payload.result,
-                            resultSetCounter: state.game.resultSetCounter + 1
-                        }
+                        resultOne: action.payload.result,
+                        resultSetCounter: state.resultSetCounter + 1
                     };
                 case 1:
                     return {
                         ...state,
-                        game: {
-                            ...state.game,
-                            resultTwo: action.payload.result,
-                            resultSetCounter: state.game.resultSetCounter + 1
-                        }
+                        resultTwo: action.payload.result,
+                        resultSetCounter: state.resultSetCounter + 1
                     };
                 case 2:
                     return {
                         ...state,
-                        game: {
-                            ...state.game,
-                            resultThree: action.payload.result,
-                            resultSetCounter: state.game.resultSetCounter + 1
-                        }
+                        resultThree: action.payload.result,
+                        resultSetCounter: state.resultSetCounter + 1
                     };
                 case 3:
                     return {
                         ...state,
-                        game: {
-                            ...state.game,
-                            resultFour: action.payload.result,
-                            resultSetCounter: state.game.resultSetCounter + 1
-                        }
+                        resultFour: action.payload.result,
+                        resultSetCounter: state.resultSetCounter + 1
                     };
                 case 4:
                     return {
                         ...state,
-                        game: {
-                            ...state.game,
-                            resultFive: action.payload.result,
-                            resultSetCounter: state.game.resultSetCounter + 1
-                        }
+                        resultFive: action.payload.result,
+                        resultSetCounter: state.resultSetCounter + 1
                     };
             }
             break;
@@ -74,10 +56,7 @@ export const gameReducers = (
         case EGameActions.SetResultCounter: {
             return {
                 ...state,
-                game: {
-                    ...state.game,
-                    resultSetCounter: action.payload
-                },
+                resultSetCounter: action.payload
             };
         }
         case EGameActions.SetSpinDisabled: {

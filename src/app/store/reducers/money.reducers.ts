@@ -9,29 +9,20 @@ export const moneyReducers = (
         case EMoneyActions.SetBet: {
             return {
                 ...state,
-                money: {
-                    ...state.money,
-                    bet: action.payload
-                }
+                bet: action.payload
             };
         }
         case EMoneyActions.StartBet: {
             return {
                 ...state,
-                money: {
-                    ...state.money,
-                    balance: state.money.balance - action.payload
-                }
+                balance: state.balance - action.payload
             };
         }
         case EMoneyActions.WinBet: {
             return {
                 ...state,
-                money: {
-                    ...state.money,
-                    balance: state.money.balance + action.payload,
-                    win: state.money.win + action.payload
-                }
+                balance: state.balance + action.payload,
+                win: state.win + action.payload
             };
         }
         default:
